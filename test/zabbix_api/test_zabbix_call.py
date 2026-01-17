@@ -4,15 +4,14 @@
 
 
 #!/usr/bin/env python3
-
+import os
 import requests
 import json
 import datetime
 
 
-
-token = "Bearer bfa02eeb039926324e80aefdefde96a9b7eac1cb89f8a607326f411a41ed70f5"
-url = "http://ec2-44-222-69-151.compute-1.amazonaws.com/api_jsonrpc.php"
+token = os.environ["ZABBIX_API_TOKEN"]
+url = os.environ["ZABBIX_API_URL"]
 
 unixtime = int(datetime.datetime.now().timestamp())
 nanosec = int(datetime.datetime.now().microsecond * 1000)
@@ -29,7 +28,7 @@ data = {
     "jsonrpc":"2.0",
     "method":"history.push",
     "params":{
-        "itemid":"69140",
+        "itemid":"69141",
         "value":125,
         "clock":unixtime,
         "ns":nanosec},

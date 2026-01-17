@@ -1,22 +1,21 @@
+import os
 import requests
 import json
 import datetime
 
-TOKEN = "Bearer bfa02eeb039926324e80aefdefde96a9b7eac1cb89f8a607326f411a41ed70f5"
-URL = "http://ec2-44-222-69-151.compute-1.amazonaws.com/api_jsonrpc.php"
-
-ITEM_ID = "69140"
-
 
 def call_zabbix_api(item_id: str, value: float) -> dict:
 
-# Prepare API header
+  token = os.environ["ZABBIX_API_TOKEN"]
+  url = os.environ["ZABBIX_API_URL"]
+
+  # Prepare API header
   headers = {
-    "Authorization": TOKEN,
+    "Authorization": token,
     "Content-Type": "application/json-rpc"
     }
 
-# Prepare data
+  # Prepare data
   unixtime = int(datetime.datetime.now().timestamp())
   nanosec = int(datetime.datetime.now().microsecond * 1000)
 
@@ -32,7 +31,7 @@ def call_zabbix_api(item_id: str, value: float) -> dict:
     }
 
   # Call API
-  response = requests.post(URL, 
+  response = requests.post(url, 
                            headers=headers,
                            data=json.dumps(data))
 
@@ -42,5 +41,7 @@ def call_zabbix_api(item_id: str, value: float) -> dict:
 
   return data
 
+
 # Test
+# ITEM_ID = "69140"
 # call_zabbix_api(ITEM_ID, 123.456)

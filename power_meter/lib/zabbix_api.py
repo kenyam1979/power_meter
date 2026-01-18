@@ -25,16 +25,13 @@ def call_zabbix_api(item_id: str, value: float) -> dict:
     # Call API
     response = requests.post(url, headers=headers, data=json.dumps(data))
 
-    # Response
-    data = response.json()
-    # print(json.dumps(data, indent=2))
-
-    return data
+    return response.json()
 
 
 def log_dump(response: dict, file_path: str):
     with open(file_path, "a") as f:
         f.write(json.dumps(response) + "\n")
+        
 
 
 # Test

@@ -5,41 +5,36 @@ import datetime
 
 
 def call_zabbix_api(item_id: str, value: float) -> dict:
+    token = os.environ["ZABBIX_API_TOKEN"]
+    url = os.environ["ZABBIX_API_URL"]
 
-  token = os.environ["ZABBIX_API_TOKEN"]
-  url = os.environ["ZABBIX_API_URL"]
+    # Prepare API header
+    headers = {"Authorization": token, "Content-Type": "application/json-rpc"}
 
-  # Prepare API header
-  headers = {
-    "Authorization": token,
-    "Content-Type": "application/json-rpc"
+    # Prepare data
+    unixtime = int(datetime.datetime.now().timestamp())
+    nanosec = int(datetime.datetime.now().microsecond * 1000)
+
+    data = {
+        "jsonrpc": "2.0",
+        "method": "history.push",
+        "params": {"itemid": item_id, "value": value, "clock": unixtime, "ns": nanosec},
+        "id": 1,
     }
 
-  # Prepare data
-  unixtime = int(datetime.datetime.now().timestamp())
-  nanosec = int(datetime.datetime.now().microsecond * 1000)
+    # Call API
+    response = requests.post(url, headers=headers, data=json.dumps(data))
 
-  data = {
-    "jsonrpc":"2.0",
-    "method":"history.push",
-    "params":{
-      "itemid":item_id,
-      "value":value,
-      "clock":unixtime,
-      "ns":nanosec},
-    "id":1
-    }
+    # Response
+    data = response.json()
+    # print(json.dumps(data, indent=2))
 
-  # Call API
-  response = requests.post(url, 
-                           headers=headers,
-                           data=json.dumps(data))
+    return data
 
-  # Response
-  data = response.json()
-  # print(json.dumps(data, indent=2))
 
-  return data
+def log_dump(response: dict, file_path: str):
+    with open(file_path, "a") as f:
+        f.write(json.dumps(response) + "\n")
 
 
 # Test

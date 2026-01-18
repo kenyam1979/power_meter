@@ -1,3 +1,5 @@
+# TODO: Add error handling
+
 import os
 import requests
 import json

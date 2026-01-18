@@ -5,7 +5,7 @@ from .lib.zabbix_api import call_zabbix_api, log_dump
 
 
 def main():
-    ITEM_ID = '69140'
+    ITEM_ID = "69140"
 
     # Initialize sensor
     chan = initialize_sensor()
@@ -17,7 +17,6 @@ def main():
     response = call_zabbix_api(ITEM_ID, power_value)
 
     # Record log
-    date = datetime.datetime.now().strftime('%Y%m%d')
-    log_file = f'./log/zabbix_api_log_{date}.txt'
+    date = datetime.datetime.now().strftime("%Y%m%d")
+    log_file = f"./log/zabbix_api_log_{date}.txt"
     log_dump(response, log_file)
-

@@ -1,3 +1,6 @@
+# TODO: Add error handling
+# TODO: Add multi sennsor support
+
 import math
 import time
 import board

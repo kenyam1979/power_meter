@@ -33,7 +33,6 @@ def call_zabbix_api(item_id: str, value: float) -> dict:
 def log_dump(response: dict, file_path: str):
     with open(file_path, "a") as f:
         f.write(json.dumps(response) + "\n")
-        
 
 
 # Test

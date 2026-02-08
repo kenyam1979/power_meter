@@ -1,5 +1,4 @@
 # TODO: Add error handling
-# TODO: Add multi sennsor support
 
 import math
 import time
@@ -25,7 +24,55 @@ def initialize_sensor() -> AnalogIn:
     return ch
 
 
+def initialize_ads1115() -> ADS1115:
+    """ "Initialize and return the ADS1115 object.
+    Returns:
+        ADS1115: The initialized ADS1115 object.
+    """
+
+    # Create the I2C bus
+    i2c = board.I2C()
+
+    # Create the ADC object using the I2C bus
+    ads = ADS1115(i2c)
+
+    # ADC Configuration
+    ads.mode = ads1x15.Mode.CONTINUOUS
+    ads.data_rate = 860
+
+    return ads
+
+
+
+def get_channel(ads: ADS1115, channel: int) -> AnalogIn:
+    """Get the specified channel from the ADS1115 object.
+    Args:
+        ads (ADS1115): The ADS1115 object.
+        channel (int): The channel number (0-3).
+    Returns:
+        AnalogIn: The specified channel as an AnalogIn object.
+    """
+
+    if channel == 0:
+        return AnalogIn(ads, ads1x15.Pin.A0)
+    elif channel == 1:
+        return AnalogIn(ads, ads1x15.Pin.A1)
+    elif channel == 2:
+        return AnalogIn(ads, ads1x15.Pin.A2)
+    elif channel == 3:
+        return AnalogIn(ads, ads1x15.Pin.A3)
+    else:
+        raise ValueError("Invalid channel number. Must be 0-3.")
+
+
+
 def read_power(chan: AnalogIn) -> float:
+    """Read power from the given channel.
+    Args:
+        chan (AnalogIn): The channel to read from.
+    Returns:
+        float: The estimated power in Watts.
+    """
     counter = 0
 
     voltage_ch = 0.0

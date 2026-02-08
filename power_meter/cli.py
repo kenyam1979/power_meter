@@ -24,6 +24,8 @@ def main():
     response = call_zabbix_api(ITEM_ID, power_value)
 
     # Record log
-    date = datetime.datetime.now().strftime("%Y%m%d")
+    now = datetime.datetime.now()
+    date = now.strftime("%Y%m%d")
+    datetime = now.strftime("%Y%m%d %H%M%S")
     log_file = f"./log/zabbix_api_log_{date}.txt"
-    log_dump(response, log_file)
+    log_dump(response, log_file, datetime)

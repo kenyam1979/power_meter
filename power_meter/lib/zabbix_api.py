@@ -7,6 +7,15 @@ import datetime
 
 
 def call_zabbix_api(item_id: str, value: float) -> dict:
+    """Call Zabbix API to send data.
+    Args:
+        item_id (str): The Zabbix item ID.
+        value (float): The value to send. 
+    Returns:
+        dict: The response from the Zabbix API.
+    """
+    
+    # Get environment variables
     token = os.environ["ZABBIX_API_TOKEN"]
     url = os.environ["ZABBIX_API_URL"]
 
@@ -30,9 +39,18 @@ def call_zabbix_api(item_id: str, value: float) -> dict:
     return response.json()
 
 
-def log_dump(response: dict, file_path: str):
+
+
+def log_dump(response: dict, file_path: str, datetime: str) -> None:
+    """Dump the API response to a log file.
+    Args:
+        response (dict): The API response.
+        file_path (str): The path to the log file.
+        datetime (str): The datetime string for the log entry.
+    """ 
+    
     with open(file_path, "a") as f:
-        f.write(json.dumps(response) + "\n")
+        f.write(f"{datetime}: {json.dumps(response)}\n")
 
 
 # Test

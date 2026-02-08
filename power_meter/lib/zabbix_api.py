@@ -41,17 +41,16 @@ def call_zabbix_api(item_id: str, value: float) -> dict:
 
 
 
-def log_dump(response: dict, file_path: str, datetime: str) -> None:
+def log_dump(response: dict, file_path: str, time: str) -> None:
     """Dump the API response to a log file.
     Args:
         response (dict): The API response.
         file_path (str): The path to the log file.
-        datetime (str): The datetime string for the log entry.
+        time (str): The time string for the log entry.
     """ 
     
     with open(file_path, "a") as f:
-        f.write(f"{datetime}: {json.dumps(response)}\n")
-
+        f.write(f"{time}: {json.dumps(response)}\n")
 
 # Test
 # ITEM_ID = "69140"

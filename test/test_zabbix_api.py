@@ -1,3 +1,4 @@
+import sys
 import pytest
 
 
@@ -33,11 +34,12 @@ def test_log_dump(tmp_path):
     }
 
     file_path = tmp_path / "test_log.txt"
-
     import json
+    import datetime
     from power_meter.lib.zabbix_api import log_dump
 
-    log_dump(response, file_path)
+    time = datetime.datetime.now().strftime("%Y%m%d %H%M%S")
+    log_dump(response, file_path, time)
 
     assert file_path.exists()
-    assert file_path.read_text() == json.dumps(response) + "\n"
+    assert file_path.read_text() == f"{time}: {json.dumps(response)}\n"

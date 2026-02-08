@@ -1,16 +1,19 @@
+# TODO: Consider the proper log strategy and implement
+# TODO: Add error handling
+# TODO: Add new channel support
+
 import datetime
 
 from .lib.ct_sensor import (
     get_channel,
     initialize_ads1115,
-    initialize_sensor,
     read_power,
 )
 from .lib.zabbix_api import call_zabbix_api, log_dump
 
 
 def main():
-    ITEM_ID = "69140" # Redline
+    ITEM_ID = "69140"  # Redline
 
     # Initialize sensor
     # chan = initialize_sensor()

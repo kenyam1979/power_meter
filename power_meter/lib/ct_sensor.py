@@ -6,22 +6,22 @@ import board
 from adafruit_ads1x15 import ADS1115, AnalogIn, ads1x15
 
 
-def initialize_sensor() -> AnalogIn:
-    # Create the I2C bus
-    i2c = board.I2C()
+# def initialize_sensor() -> AnalogIn:
+#     # Create the I2C bus
+#     i2c = board.I2C()
 
-    # Create the ADC object using the I2C bus
-    ads = ADS1115(i2c)
+#     # Create the ADC object using the I2C bus
+#     ads = ADS1115(i2c)
 
-    # ADC Configuration
-    ads.mode = ads1x15.Mode.CONTINUOUS
-    ads.data_rate = 860
+#     # ADC Configuration
+#     ads.mode = ads1x15.Mode.CONTINUOUS
+#     ads.data_rate = 860
 
-    # Create single-ended input on channel 0
-    ch = AnalogIn(ads, ads1x15.Pin.A0)
-    # chan = AnalogIn(ads, ads1x15.Pin.A0, ads1x15.Pin.A1)
+#     # Create single-ended input on channel 0
+#     ch = AnalogIn(ads, ads1x15.Pin.A0)
+#     # chan = AnalogIn(ads, ads1x15.Pin.A0, ads1x15.Pin.A1)
 
-    return ch
+#     return ch
 
 
 def initialize_ads1115() -> ADS1115:

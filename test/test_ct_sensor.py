@@ -58,5 +58,5 @@ def test_get_channel():
     assert chan2.pin == 2
     assert chan3.pin == 3
 
-    with pytest.raises(ValueError):
+    with pytest.raises(RuntimeError):
         get_channel(ads, 4)

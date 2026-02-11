@@ -24,8 +24,8 @@ def test_call_zabbix_api(monkeypatch):
     response = call_zabbix_api(item_id, value)
     assert response["result"]["response"] == "success"
     assert response["result"]["data"][0]["itemid"] == 69141
-
-
+    
+    
 def test_log_dump(tmp_path):
     response = {
         "jsonrpc": "2.0",

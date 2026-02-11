@@ -38,6 +38,38 @@ def call_zabbix_api(item_id: str, value: float) -> dict:
 
     return response.json()
 
+def call_zabbix_api2(item_id: str, value: float, now: datetime.datetime) -> dict:
+    """Call Zabbix API to send data.
+    Args:
+        item_id (str): The Zabbix item ID.
+        value (float): The value to send. 
+        now (datetime.datetime): The current datetime.
+    Returns:
+        dict: The response from the Zabbix API.
+    """
+    
+    # Get environment variables
+    token = os.environ["ZABBIX_API_TOKEN"]
+    url = os.environ["ZABBIX_API_URL"]
+
+    # Prepare API header
+    headers = {"Authorization": token, "Content-Type": "application/json-rpc"}
+
+    # Prepare data
+    unixtime = int(now.timestamp())
+    nanosec = int(now.microsecond * 1000)
+
+    data = {
+        "jsonrpc": "2.0",
+        "method": "history.push",
+        "params": {"itemid": item_id, "value": value, "clock": unixtime, "ns": nanosec},
+        "id": 1,
+    }
+
+    # Call API
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+
+    return response.json()
 
 
 

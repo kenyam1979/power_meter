@@ -1,4 +1,4 @@
-# TODO: Consider the proper log strategy and implement
+# TODO: Consider the proper log strategy and implement  => Log only  at error occurrence
 # TODO: Add error handling
 # TODO: Add new channel support
 
@@ -13,22 +13,29 @@ from .lib.zabbix_api import call_zabbix_api, log_dump
 
 
 def main():
-    ITEM_ID = "69140"  # Redline
 
     # Initialize sensor
     # chan = initialize_sensor()
     ads = initialize_ads1115()
 
-    # Read channel 0
+    # Read and record channel 0
     chan = get_channel(ads, 0)
     power_value = read_power(chan)
+    ITEM_ID0 = "69140"  # Redline
+    response0 = call_zabbix_api(ITEM_ID0, power_value)
 
-    # Send data to Zabbix API
-    response = call_zabbix_api(ITEM_ID, power_value)
+    # Read and record channel 1
+    chan = get_channel(ads, 1)
+    power_value = read_power(chan)  
+    ITEM_ID1 = "69142"  # Blackline
+    response1 = call_zabbix_api(ITEM_ID1, power_value)
+
 
     # Record log
     now = datetime.datetime.now()
     date = now.strftime("%Y%m%d")
     time = now.strftime("%Y%m%d %H%M%S")
     log_file = f"./log/zabbix_api_log_{date}.txt"
-    log_dump(response, log_file, time)
+    log_dump(response0, log_file, time)
+    log_dump(response1, log_file, time)
+    

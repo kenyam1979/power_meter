@@ -1,6 +1,5 @@
 # TODO: Consider the proper log strategy and implement  => Log only  at error occurrence
 # TODO: Add error handling
-# TODO: Add new channel support
 
 import datetime
 

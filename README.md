@@ -36,18 +36,19 @@ AC line -> CT sensor -> interface board -> ADS1115 -> I2C -> Raspberry Pi -> pow
 The Python code treats the ADC inputs as voltage measurements from the CT sensor circuit. It then calculates RMS voltage over a one-second sampling window and converts that into estimated current and power using the calibration constants currently hard-coded in `power_meter/lib/ct_sensor.py`.
 
 The hardware photos show:
-
+- Circuit diagram
 - Overall assembled unit
 - Front side of the HAT / interface board
 - Back side of the HAT / interface board
 
-![Hardware](/resources/2026-06-21_18.18.26.jpg)
+![Circuit diagram](./resources/circuit.png)
 
-![Hardware-Hat front](/resources/2026-06-21_18.18.32.jpg)
+![Hardware](./resources/2026-06-21_18.18.26.jpg)
 
-![Hardware-Hat back](/resources/2026-06-21_18.19.38.jpg)
+![Hardware-Hat front](./resources/2026-06-21_18.18.32.jpg)
 
-![Circuit drawing](./resources/circuit.png)
+![Hardware-Hat back](./resources/2026-06-21_18.19.38.jpg)
+
 
 ### Entry point
 

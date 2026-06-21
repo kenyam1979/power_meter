@@ -47,6 +47,7 @@ The hardware photos show:
 
 ![Hardware-Hat back](/resources/2026-06-21_18.19.38.jpg)
 
+![Circuit drawing](./resources/circuit.png)
 
 ### Entry point
 

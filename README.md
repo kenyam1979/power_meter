@@ -48,16 +48,25 @@ The hardware photos show:
 ![Hardware-Hat front](./resources/2026-06-21_18.18.32.jpg)
 
 ![Hardware-Hat back](./resources/2026-06-21_18.19.38.jpg)
+#### BOM
+| Part  | URL |
+| -------------- | --------------- |
+| Raspberryi PI 4B 8MB | https://amzn.asia/d/09VkZCds |
+| CT sensor + ADS1115 | https://amzn.asia/d/09E6AdKU |
+| Addtional CT sensor | https://amzn.asia/d/0j46FoEJ |
 
 
-### Entry point
+
+
+### Software
+#### Entry point
 
 - `power_meter/__main__.py`
   Runs the package as `python -m power_meter`.
 - `power_meter/cli.py`
   Main application flow. Coordinates sensor setup, sampling, Zabbix upload, and log writing.
 
-### Sensor layer
+#### Sensor layer
 
 - `power_meter/lib/ct_sensor.py`
   Contains the hardware-facing logic:
@@ -78,7 +87,7 @@ current = rms_voltage * 2000 / 100
 power = current * 100
 ```
 
-### Zabbix integration
+#### Zabbix integration
 
 - `power_meter/lib/zabbix_api.py`
   Builds and sends a JSON-RPC `history.push` request to Zabbix using `requests`.
@@ -88,7 +97,7 @@ Required environment variables:
 - `ZABBIX_API_URL`
 - `ZABBIX_API_TOKEN`
 
-### Tests
+#### Tests
 
 - `test/test_ct_sensor.py`
   Unit tests for channel selection and power conversion with mocked hardware modules.

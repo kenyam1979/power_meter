@@ -49,11 +49,11 @@ The hardware photos show:
 
 ![Hardware-Hat back](./resources/2026-06-21_18.19.38.jpg)
 #### BOM
-| Part  | URL |
-| -------------- | --------------- |
+| Part                 | URL                          |
+| -------------------- | ---------------------------- |
 | Raspberryi PI 4B 8MB | https://amzn.asia/d/09VkZCds |
-| CT sensor + ADS1115 | https://amzn.asia/d/09E6AdKU |
-| Addtional CT sensor | https://amzn.asia/d/0j46FoEJ |
+| CT sensor + ADS1115  | https://amzn.asia/d/09E6AdKU |
+| Addtional CT sensor  | https://amzn.asia/d/0j46FoEJ |
 
 
 
